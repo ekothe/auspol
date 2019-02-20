@@ -1,5 +1,6 @@
 library(dplyr)
 library(stringr)
+
 bound <- bind_rows(df_2019, df_2016,df_2013)
 
 bound <- select(bound, Date, Firm, Labor_2PP, LNP_2PP, Labor, LNP, ONP, Other, SampleSize, Margin, Method)
@@ -49,9 +50,8 @@ dates <- tibble(dates = dates) %>%
   select(-day_three_four, -dates_without_day_one) %>%
   
   mutate(start_date = as.Date(paste(end_year,month_one, day_one, sep = "-"), format = "%Y-%b-%d"),
-         end_date = as.Date(paste(end_year,month_two, day_two, sep = "-"), format = "%Y-%b-%d"),
-         Date = dates) %>%
-  select(Date, start_date, end_date, everything())
+         end_date = as.Date(paste(end_year,month_two, day_two, sep = "-"), format = "%Y-%b-%d")) %>%
+  select(start_date, end_date, everything())
 
 auspol <- cbind(bound, dates)
 
