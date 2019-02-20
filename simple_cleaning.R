@@ -1,3 +1,5 @@
+library(dplyr)
+library(stringr)
 bound <- bind_rows(df_2019, df_2016,df_2013)
 
 bound <- select(bound, Date, Firm, Labor_2PP, LNP_2PP, Labor, LNP, ONP, Other, SampleSize, Margin, Method)
@@ -53,3 +55,4 @@ dates <- tibble(dates = dates) %>%
 
 auspol <- cbind(bound, dates)
 
+readr::write_csv(auspol, "auspol.csv")
